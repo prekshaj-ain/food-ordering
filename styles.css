@@ -25,6 +25,7 @@ h5 {
 }
 h6 {
   font-size: 0.9rem;
+  color: #444;
 }
 p {
   font-size: 0.75rem;
@@ -36,4 +37,11 @@ button {
   background: transparent;
   border: none;
   outline: none;
+}
+
+a,
+a:focus,
+a:hover,
+a:visited {
+  text-decoration: none;
 }
