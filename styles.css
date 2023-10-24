@@ -31,12 +31,14 @@ p {
   font-size: 0.75rem;
   font-weight: lighter;
   color: #666;
+  line-height: 0.75rem;
 }
 
 button {
   background: transparent;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 
 a,
