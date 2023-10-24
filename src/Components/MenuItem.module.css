@@ -1,0 +1,77 @@
+.container {
+  width: 100%;
+}
+.container > *:first-child {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: calc(100% - 144px);
+  width: 80%;
+  font-size: 0.75rem;
+  font-weight: bolder;
+  color: #444;
+}
+/* veg/nonveg */
+.tag {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.tag > *:first-child {
+  width: 20px;
+  height: 20px;
+}
+.tag > *:first-child > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.bestseller {
+  display: flex;
+  color: orange;
+  line-height: 0.75rem;
+}
+.description {
+  font-weight: lighter;
+  font-size: 0.6rem;
+  padding-block: 5px;
+}
+.image {
+  position: relative;
+  height: 96px;
+  width: 110px;
+}
+.image > img {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.image > .add {
+  position: absolute;
+  padding: 10px;
+  border: 1px solid #d3d3d3;
+  left: 10px;
+  right: 10px;
+  background-color: white;
+  color: green;
+  font-size: 0.6rem;
+  font-weight: bolder;
+  border-radius: 10px;
+  bottom: -10px;
+  box-shadow: 0 3px 8px #e9e9eb;
+}
+.add:hover {
+  box-shadow: 0 5px 10px #d1d1d3;
+}
+
+.container > *:last-child {
+  border-bottom: 0.5px solid #d3d3d3;
+  height: 0.5px;
+  margin: 20px 0;
+}
