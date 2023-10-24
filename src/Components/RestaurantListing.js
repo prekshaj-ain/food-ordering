@@ -1,5 +1,4 @@
 import AllRestaurants from "./AllRestaurants";
-import styles from "./RestaurantListing.module.css";
 const RestaurantListing = function ({ restaurants }) {
   console.log(restaurants);
   return (
