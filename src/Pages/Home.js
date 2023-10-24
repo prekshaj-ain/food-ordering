@@ -5,6 +5,7 @@ import { HOMEPAGE_API } from "../Constants/endPoints";
 
 const Home = function () {
   let [data, setData] = useState([]);
+  let [restaurants, setRestaurants] = useState([]);
   useEffect(() => {
     const fetchData = async function () {
       try {
@@ -16,16 +17,19 @@ const Home = function () {
     };
     fetchData();
   }, []);
+  useEffect(() => {
+    for (let ele of data) {
+      if (ele.card.card.id === "restaurant_grid_listing") {
+        setRestaurants(ele.card.card.gridElements.infoWithStyle.restaurants);
+      }
+    }
+  }, [data]);
   if (data.length === 0) {
     return <Layout>Loading...</Layout>;
   }
   return (
     <Layout>
-      <RestaurantListing
-        restaurants={
-          data[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-        }
-      />
+      <RestaurantListing restaurants={restaurants} />
     </Layout>
   );
 };
