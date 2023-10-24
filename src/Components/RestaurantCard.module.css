@@ -1,0 +1,72 @@
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: hidden;
+  min-width: 0;
+  transition: transform ease 300ms;
+}
+.card:hover {
+  transform: scale(0.95);
+}
+.image {
+  width: 100%;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 3/2;
+}
+.image > img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: inherit;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.image > h6 {
+  padding: 10px 10px;
+  position: absolute;
+  color: white;
+  background: linear-gradient(rgba(27, 30, 36, 0) 0%, rgb(27, 30, 36) 84.21%);
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  width: 100%;
+}
+.info > h5 {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  padding-right: 20px;
+}
+.info > .rate {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.info > p {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  padding-right: 20px;
+}
+
+@media (max-width: 425px) {
+  .image > h6 > * {
+    display: flex;
+  }
+  .image > h6 > *:last-child {
+    color: rgb(175, 175, 175);
+    font-size: 0.5rem;
+  }
+}

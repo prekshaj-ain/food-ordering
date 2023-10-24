@@ -1,0 +1,64 @@
+.infoContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-block: 18px;
+}
+
+.rating {
+  border-radius: 10px;
+  width: 3.5rem;
+  height: 3.5rem;
+  color: #777;
+  border: 1px solid currentColor;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+  font-weight: bolder;
+  align-items: center;
+  gap: 5px;
+}
+.rating > *:first-child {
+  font-size: 16px;
+  display: flex;
+  color: green;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: 5px;
+  border-bottom: 1px solid currentColor;
+}
+.rating > * {
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: -1px;
+}
+.starIcon {
+  width: 1.1rem !important;
+  height: 1.1rem !important;
+}
+.feeMessage {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 18px;
+}
+.dashedLine {
+  border: none;
+  border-bottom: 1px dashed #888;
+}
+.timeCost {
+  display: flex;
+  gap: 1.5rem;
+  margin-block: 18px;
+}
+.timeCost > * {
+  display: flex;
+  gap: 5px;
+}
+.veg {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-block: 18px;
+}

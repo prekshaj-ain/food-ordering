@@ -1,0 +1,9 @@
+.layout {
+  padding-inline: calc(10% + 36px);
+}
+
+@media (max-width: 769px) {
+  .layout {
+    padding: 0.5rem;
+  }
+}
