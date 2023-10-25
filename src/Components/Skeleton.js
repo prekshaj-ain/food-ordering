@@ -15,6 +15,21 @@ const Skeleton = function ({ type }) {
       </Layout>
     );
   }
+  if (type === "Single") {
+    return (
+      <Layout>
+        <div className={styles.details}>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div className={styles.heading}></div>
+        {Array.from(Array(10)).map((e, index) => {
+          return <div className={styles.item} key={index}></div>;
+        })}
+      </Layout>
+    );
+  }
 };
 
 export default Skeleton;

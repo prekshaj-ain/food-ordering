@@ -3,6 +3,7 @@ import Layout from "../Components/Layout";
 import { useEffect, useState } from "react";
 import { RESTAURANT_DETAILS } from "../Constants/endPoints";
 import RestaurantDetails from "../Components/RestaurantDetails";
+import Skeleton from "../Components/Skeleton";
 
 const SingleRestaurant = function () {
   let { id } = useParams();
@@ -18,7 +19,7 @@ const SingleRestaurant = function () {
     }
   }, [id]);
 
-  if (!details) return null;
+  if (!details) return <Skeleton type="Single" />;
   return (
     <Layout>
       <RestaurantDetails
