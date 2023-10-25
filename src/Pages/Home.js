@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+
 import Layout from "../Components/Layout";
 import RestaurantListing from "../Components/RestaurantListing";
 import { HOMEPAGE_API } from "../Constants/endPoints";
+import Skeleton from "../Components/Skeleton";
 
 const Home = function () {
   let [data, setData] = useState([]);
@@ -25,7 +27,7 @@ const Home = function () {
     }
   }, [data]);
   if (data.length === 0) {
-    return <Layout>Loading...</Layout>;
+    return <Skeleton type="Home" />;
   }
   return (
     <Layout>
