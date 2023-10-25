@@ -32,7 +32,7 @@ const MenuItem = function ({ item }) {
           <button className={styles.add}>ADD</button>
         </div>
       </div>
-      <div></div>
+      <div className={styles.divider}></div>
     </div>
   );
 };
