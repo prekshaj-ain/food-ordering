@@ -1,11 +1,15 @@
 import StarIcon from "@mui/icons-material/Star";
 import InfoIcon from "@mui/icons-material/Info";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import { useDispatch } from "react-redux";
 
 import styles from "./RestaurantHeader.module.css";
+import { setCurrentRestaurant } from "../Store/Slices/appSlice";
 
 const RestaurantHeader = function ({ info }) {
   let {
+    id,
+    cloudinaryImageId: imgId,
     areaName,
     cuisines,
     name,
@@ -13,8 +17,18 @@ const RestaurantHeader = function ({ info }) {
     totalRatingsString,
     costForTwoMessage: cost,
   } = info;
-  let feeMessage = info.feeDetails?.message;
+  let { message: feeMessage = "", totalFee: delivery = 0 } = info.feeDetails;
   let time = info?.sla?.slaString;
+  const dispatch = useDispatch();
+  dispatch(
+    setCurrentRestaurant({
+      id,
+      name,
+      areaName,
+      imgId,
+      deliveryCharge: delivery / 100,
+    })
+  );
   return (
     <div>
       <div className={styles.infoContainer}>
