@@ -4,9 +4,11 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import styles from "./MenuCategory.module.css";
 import MenuItem from "./MenuItem";
 
-const MenuCategory = function ({ category, subCat }) {
-  console.log(category);
-  const { title, itemCards: items, categories } = category;
+const MenuCategory = function ({ category, subCat, veg }) {
+  let { title, itemCards: items, categories } = category;
+  if (veg && items) {
+    items = items.filter((item) => item.card.info.isVeg === 1);
+  }
   const [show, setShow] = useState(true);
   const handleClick = function () {
     setShow((prev) => !prev);
@@ -31,7 +33,7 @@ const MenuCategory = function ({ category, subCat }) {
   }
   return (
     <div>
-      {items && (
+      {items?.length > 0 && (
         <div className={subCat ? "" : styles.category}>
           <button className={styles.toggleShow} onClick={handleClick}>
             <h6>{`${title}  (${items?.length})`}</h6>
