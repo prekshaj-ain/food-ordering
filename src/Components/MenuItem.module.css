@@ -66,6 +66,22 @@
   bottom: -10px;
   box-shadow: 0 3px 8px #e9e9eb;
 }
+.quantity {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  font-size: 0.7rem !important;
+}
+.quantity > button {
+  color: green;
+  font-weight: bold;
+  font-size: 0.8rem;
+  transform: scale(1);
+  transition: transform 300ms ease;
+}
+.quantity > button:hover {
+  transform: scale(1.2);
+}
 .add:hover {
   box-shadow: 0 5px 10px #d1d1d3;
 }
