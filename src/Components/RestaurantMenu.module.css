@@ -4,3 +4,15 @@
   align-items: center;
   margin-block: 18px;
 }
+.vegToggle {
+  display: flex;
+  gap: 1rem;
+  padding-block: 18px;
+  align-items: center;
+}
+.vegToggle > h6 {
+  font-size: 0.75rem;
+}
+.vegToggle > div {
+  height: 18px;
+}
