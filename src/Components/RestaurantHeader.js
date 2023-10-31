@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 import styles from "./RestaurantHeader.module.css";
 import { setCurrentRestaurant } from "../Store/Slices/appSlice";
+import { useEffect } from "react";
 
 const RestaurantHeader = function ({ info }) {
   let {
@@ -20,15 +21,20 @@ const RestaurantHeader = function ({ info }) {
   let { message: feeMessage = "", totalFee: delivery = 0 } = info.feeDetails;
   let time = info?.sla?.slaString;
   const dispatch = useDispatch();
-  dispatch(
-    setCurrentRestaurant({
-      id,
-      name,
-      areaName,
-      imgId,
-      deliveryCharge: delivery / 100,
-    })
-  );
+  useEffect(() => {
+    dispatch(
+      setCurrentRestaurant({
+        id,
+        name,
+        areaName,
+        imgId,
+        deliveryCharge: delivery / 100,
+      })
+    );
+    return () => {
+      dispatch(setCurrentRestaurant(null));
+    };
+  }, []);
   return (
     <div>
       <div className={styles.infoContainer}>
