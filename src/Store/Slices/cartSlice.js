@@ -36,6 +36,7 @@ const cartSlice = createSlice({
       state.items = [];
       state.quantities = [];
       state.restaurant = null;
+      state.subTotal = 0;
     },
   },
 });
