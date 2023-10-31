@@ -1,0 +1,106 @@
+.container {
+  display: flex;
+}
+.items {
+  flex-grow: 3;
+}
+.info,
+.bill > div {
+  margin: 30px 10px;
+  background-color: rgb(241, 241, 241);
+  padding: 10px;
+}
+.restaurant {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid black;
+}
+.image {
+  width: 60px;
+  height: 60px;
+}
+.image > img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.bill > div {
+  box-shadow: rgba(10, 44, 6, 0.4) 0px 0px 0px 2px,
+    rgba(15, 44, 6, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  min-width: 150px;
+}
+.bill > div > * {
+  display: flex;
+  justify-content: space-between;
+}
+.bill > div > button {
+  width: 100%;
+  padding: 10px;
+  justify-content: center;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+.bill > div > button:hover {
+  background-color: rgb(54, 54, 54);
+}
+.item {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.item > *:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 50%;
+}
+.tag {
+  width: 30px;
+  height: 30px;
+}
+.tag > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.add {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 0.7rem;
+  padding: 10px;
+  font-weight: bold;
+  border: 1px solid #d3d3d3;
+  border-radius: 10px;
+  background-color: white;
+  width: 80px;
+  color: green;
+}
+.add > button {
+  font-weight: bold;
+  color: inherit;
+  transform: scale(1);
+  transition: transform 200ms ease;
+}
+.add > button:hover {
+  transform: scale(1.2);
+}
+.price {
+  width: 10%;
+  text-align: center;
+}
+
+@media (max-width: 769px) {
+  .container {
+    flex-direction: column;
+  }
+}
