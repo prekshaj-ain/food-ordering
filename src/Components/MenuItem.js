@@ -7,6 +7,7 @@ import NONVEG from "../Constants/Assets/nonveg.png";
 import { IMAGE_API } from "../Constants/endPoints";
 import styles from "./MenuItem.module.css";
 import { addItem, removeItem, updateQuantity } from "../Store/Slices/cartSlice";
+import Modal from "./Modal";
 
 const MenuItem = function ({ item }) {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const MenuItem = function ({ item }) {
   const cartRestaurant = useSelector((store) => store.cart.restaurant);
   const quantities = useSelector((store) => store.cart.quantities);
   const items = useSelector((store) => store.cart.items);
+  const [showModal, setShowModal] = useState(false);
   let { info } = item?.card;
   let {
     isVeg,
@@ -27,16 +29,16 @@ const MenuItem = function ({ item }) {
   } = info;
 
   const index = items.findIndex((item) => item.id === id);
+  const details = {
+    restaurant: currentRestaurant,
+    item: { id, isVeg, name, price: price / 100 || defaultPrice / 100 },
+    quantity: 1,
+  };
   const handleClick = function () {
     if (cartRestaurant === null || currentRestaurant.id === cartRestaurant.id) {
-      const details = {
-        restaurant: currentRestaurant,
-        item: { id, isVeg, name, price: price / 100 || defaultPrice / 100 },
-        quantity: 1,
-      };
       dispatch(addItem(details));
     } else {
-      alert("you can add only from one restaurant");
+      setShowModal(true);
     }
   };
   const handleIncrement = function () {
@@ -87,6 +89,7 @@ const MenuItem = function ({ item }) {
         </div>
       </div>
       <div className={styles.divider}></div>
+      {showModal && <Modal setShowModal={setShowModal} details={details} />}
     </div>
   );
 };
