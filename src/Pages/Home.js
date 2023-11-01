@@ -1,37 +1,36 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Layout from "../Components/Layout";
 import RestaurantListing from "../Components/RestaurantListing";
-import { HOMEPAGE_API } from "../Constants/endPoints";
-import Skeleton from "../Components/Skeleton";
+import { fetchMoreRestaurants, fetchRestaurants } from "../Store/apiCalls";
 
 const Home = function () {
-  let [data, setData] = useState([]);
-  let [restaurants, setRestaurants] = useState([]);
+  const nextOffset = useSelector((store) => store.restaurants.nextOffset);
+  const moreIds = useSelector((store) => store.restaurants.moreDataIds);
+  const dispatch = useDispatch();
   useEffect(() => {
-    const fetchData = async function () {
-      try {
-        const response = await fetch(HOMEPAGE_API);
-        const data = await response.json();
-        setData(data.data.cards);
-        console.log(data.data.cards);
-      } catch (err) {}
-    };
-    fetchData();
+    if (nextOffset === null) fetchRestaurants(dispatch);
   }, []);
   useEffect(() => {
-    for (let ele of data) {
-      if (ele.card.card.id === "restaurant_grid_listing") {
-        setRestaurants(ele.card.card.gridElements.infoWithStyle.restaurants);
+    const handler = function () {
+      if (
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight
+      ) {
+        if (moreIds.length > nextOffset) {
+          fetchMoreRestaurants(dispatch, nextOffset, moreIds[nextOffset]);
+        }
       }
-    }
-  }, [data]);
-  if (data.length === 0) {
-    return <Skeleton type="Home" />;
-  }
+    };
+    document.addEventListener("scroll", handler);
+    return () => {
+      document.removeEventListener("scroll", handler);
+    };
+  }, [dispatch, nextOffset]);
   return (
     <Layout>
-      <RestaurantListing restaurants={restaurants} />
+      <RestaurantListing />
     </Layout>
   );
 };
