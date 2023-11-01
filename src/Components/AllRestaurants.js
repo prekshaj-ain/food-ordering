@@ -3,8 +3,8 @@ import RestaurantCard from "./RestaurantCard";
 const AllRestaurants = function ({ list }) {
   return (
     <div className={styles.list}>
-      {list.map((item) => (
-        <RestaurantCard key={item.info.id} details={item.info} />
+      {list.map((item, index) => (
+        <RestaurantCard key={item.info.id + index} details={item.info} />
       ))}
     </div>
   );
