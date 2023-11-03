@@ -1,0 +1,93 @@
+.modal {
+  position: fixed;
+  z-index: 10;
+  background-color: white;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 700px;
+  width: 100%;
+  border-radius: 20px;
+}
+.header {
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.5px solid #9999993d;
+}
+.header > div {
+  /* padding: 10px; */
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  color: #777 !important;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 5px;
+  cursor: pointer;
+}
+.container {
+  display: flex;
+  gap: 10px;
+}
+.filters {
+  flex-basis: 33%;
+  list-style: none;
+  border-right: 0.5px solid #9999993d;
+}
+.filters > li {
+  font-size: clamp(0.75rem, 3vw, 1rem);
+  padding: 15px 20px;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+}
+.active {
+  background-color: #9999993d;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+.field {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+.field > * {
+  cursor: pointer;
+}
+.field > label {
+  font-size: clamp(0.7rem, 3vw, 1rem);
+  color: #777;
+}
+[type="radio"]:checked + label {
+  color: black;
+}
+.actions {
+  padding: 10px;
+  display: flex;
+  border-top: 0.5px solid #9999993d;
+  justify-content: end;
+  gap: 20px;
+}
+.actions > button {
+  padding: 10px;
+  border: 1px solid orange;
+  min-width: 30%;
+  border-radius: 10px;
+  font-weight: bold;
+}
+.actions > button:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.cancel {
+  color: orange;
+}
+.confirm {
+  background-color: orange;
+  color: white;
+}
