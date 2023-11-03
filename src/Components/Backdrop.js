@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-const Backdrop = () => {
+const Backdrop = ({ onClick }) => {
   const styles = {
     position: "fixed",
     top: "0",
@@ -13,7 +13,7 @@ const Backdrop = () => {
     zIndex: "5",
   };
   return ReactDOM.createPortal(
-    <div style={styles}></div>,
+    <div style={styles} onClick={onClick}></div>,
     document.getElementById("backdrop-hook")
   );
 };
