@@ -15,7 +15,9 @@ const FiltersModal = function ({ setShow }) {
   const [activeList, setActiveList] = useState("Sort");
   const [selectedFilter, setSelectedFilter] = useState(activeFilters);
   const [showAlert, setShowAlert] = useState(false);
-
+  useEffect(() => {
+    setSelectedFilter(activeFilters);
+  }, [activeFilters]);
   const handleClick = function (type) {
     setActiveList(type);
   };
@@ -35,13 +37,9 @@ const FiltersModal = function ({ setShow }) {
   };
   const handleCancel = function () {
     dispatch(clearFilters());
-    setSelectedFilter({
-      Sort: ["Relevance"],
-    });
     setShowAlert(true);
   };
   const handleConfirm = function () {
-    console.log(selectedFilter);
     dispatch(addFilter(selectedFilter));
     setShow(false);
   };
