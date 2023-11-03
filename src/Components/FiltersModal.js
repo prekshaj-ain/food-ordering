@@ -5,7 +5,8 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import styles from "./FiltersModal.module.css";
 import Backdrop from "./Backdrop";
-import { addFilter } from "../Store/Slices/restaurantsSlice";
+import { addFilter, clearFilters } from "../Store/Slices/restaurantsSlice";
+import { useEffect } from "react";
 
 const FiltersModal = function ({ setShow }) {
   const filters = useSelector((store) => store.app.filters);
@@ -13,6 +14,8 @@ const FiltersModal = function ({ setShow }) {
   const dispatch = useDispatch();
   const [activeList, setActiveList] = useState("Sort");
   const [selectedFilter, setSelectedFilter] = useState(activeFilters);
+  const [showAlert, setShowAlert] = useState(false);
+
   const handleClick = function (type) {
     setActiveList(type);
   };
@@ -30,12 +33,28 @@ const FiltersModal = function ({ setShow }) {
       }
     }
   };
-  const handleCancel = function () {};
+  const handleCancel = function () {
+    dispatch(clearFilters());
+    setSelectedFilter({
+      Sort: ["Relevance"],
+    });
+    setShowAlert(true);
+  };
   const handleConfirm = function () {
     console.log(selectedFilter);
     dispatch(addFilter(selectedFilter));
     setShow(false);
   };
+  useEffect(() => {
+    if (showAlert) {
+      const timer = setTimeout(() => {
+        setShowAlert(false);
+      }, 2000);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [showAlert]);
 
   const content = (
     <div className={styles.modal}>
@@ -85,6 +104,11 @@ const FiltersModal = function ({ setShow }) {
           Apply
         </button>
       </div>
+      {showAlert && (
+        <div className={styles.clearMessage}>
+          The applied filters are cleared.
+        </div>
+      )}
     </div>
   );
   return (

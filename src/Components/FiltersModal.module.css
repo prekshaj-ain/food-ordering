@@ -64,7 +64,8 @@
   font-size: clamp(0.7rem, 3vw, 1rem);
   color: #777;
 }
-[type="radio"]:checked + label {
+[type="radio"]:checked + label,
+[type="checkbox"]:checked + label {
   color: black;
 }
 .actions {
@@ -90,4 +91,18 @@
 .confirm {
   background-color: orange;
   color: white;
+}
+.clearMessage {
+  position: absolute;
+  bottom: 70px;
+  background-color: black;
+  color: white;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  width: 70%;
+  min-width: 100px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
 }
