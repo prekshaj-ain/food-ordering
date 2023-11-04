@@ -5,6 +5,9 @@ const restaurantsSlice = createSlice({
   initialState: {
     moreDataIds: [],
     data: [],
+    filters: {
+      Sort: ["Relevance"],
+    },
     nextOffset: null,
     loading: false,
     error: null,
@@ -27,9 +30,30 @@ const restaurantsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    addFilter: (state, action) => {
+      state.filters = action.payload;
+    },
+    removeFilter: (state, action) => {
+      let { filter, val } = action.payload;
+      let index = state.filters[filter].indexOf(val);
+      if (index != -1) {
+        state.filters[filter].splice(index, 1);
+      }
+    },
+    clearFilters: (state) => {
+      state.filters = {
+        Sort: ["Relevance"],
+      };
+    },
   },
 });
 
 export default restaurantsSlice.reducer;
-export const { FETCH_START, FETCH_SUCCESS, FETCH_FAIL } =
-  restaurantsSlice.actions;
+export const {
+  FETCH_START,
+  FETCH_SUCCESS,
+  FETCH_FAIL,
+  addFilter,
+  removeFilter,
+  clearFilters,
+} = restaurantsSlice.actions;
