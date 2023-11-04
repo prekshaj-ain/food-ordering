@@ -6,28 +6,37 @@ import Skeleton from "./Skeleton";
 import FilterHeader from "./FilterHeader";
 import FiltersModal from "./FiltersModal";
 import { selectFilteredRestaurants } from "../Store/Selectors/filterData";
+import Layout from "./Layout";
 
 const RestaurantListing = function () {
   const restaurants = useSelector(selectFilteredRestaurants);
   const loading = useSelector((store) => store.restaurants.loading);
   const [showFiltersModal, setShowFiltersModal] = useState(false);
   if (restaurants.length == 0) {
-    return <Skeleton type="Posts" />;
+    return (
+      <Layout>
+        <Skeleton type="Posts" />;
+      </Layout>
+    );
   }
   return (
     <div
       style={{
-        padding: ".5rem",
+        paddingBlock: ".5rem",
         display: "flex",
         flexDirection: "column",
         gap: ".5rem",
       }}
     >
-      <h4>Restaurants with online food delivery in Delhi</h4>
+      <Layout>
+        <h4>Restaurants with online food delivery in Delhi</h4>
+      </Layout>
       <FilterHeader setShow={setShowFiltersModal} />
-      {showFiltersModal && <FiltersModal setShow={setShowFiltersModal} />}
-      <AllRestaurants list={restaurants} />
-      {loading && <Skeleton type="Posts" />}
+      <Layout>
+        {showFiltersModal && <FiltersModal setShow={setShowFiltersModal} />}
+        <AllRestaurants list={restaurants} />
+        {loading && <Skeleton type="Posts" />}
+      </Layout>
     </div>
   );
 };
