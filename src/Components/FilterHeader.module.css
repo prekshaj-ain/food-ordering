@@ -1,0 +1,50 @@
+.header {
+  display: flex;
+  gap: 10px;
+  padding-block: 10px;
+  padding-inline: calc(10% + 36px);
+  overflow-x: scroll;
+}
+.sticky {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  right: 0;
+  background-color: white;
+  width: 100%;
+  padding: 20px 10%;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
+.icon,
+.show {
+  width: 0.8rem !important;
+  height: 0.8rem !important;
+  transform: rotate(0deg);
+  transition: transform 200ms ease;
+}
+.show {
+  transform: rotate(180deg);
+}
+.expand {
+  border: 1px solid #9999993d;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  padding-block: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.expand > * {
+  padding-inline: 10px;
+}
+.field {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+}
+.action {
+  color: orange;
+  cursor: pointer;
+}
