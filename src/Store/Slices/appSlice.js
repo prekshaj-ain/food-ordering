@@ -16,7 +16,7 @@ const appSlice = createSlice({
         ],
       },
       Ratings: {
-        type: "checkbox",
+        type: "radio",
         subFilter: [
           { title: "Rating 4.5+" },
           { title: "Rating 4.0+" },
@@ -28,7 +28,7 @@ const appSlice = createSlice({
         subFilter: [{ title: "Veg" }, { title: "Non Veg" }],
       },
       "Cost for two": {
-        type: "radio",
+        type: "checkbox",
         subFilter: [
           { title: "Rs. 300-Rs. 600" },
           { title: "Greater than Rs. 600" },
