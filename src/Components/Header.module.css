@@ -24,15 +24,13 @@
   padding: 5px;
 }
 
-.item:hover,
-.item:active,
 .item:focus {
   color: orange;
   background-color: transparent;
 }
+.item:focus > h6 {
+  color: orange !important;
+}
 
 @media (max-width: 769px) {
-  .item:not(.offers) {
-    display: none !important;
-  }
 }
