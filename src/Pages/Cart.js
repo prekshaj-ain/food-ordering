@@ -64,7 +64,7 @@ const cart = function () {
                   </button>
                 </div>
                 <span className={styles.price}>
-                  <p>₹{item.price * cart.quantities[index]}</p>
+                  <p>₹{(item.price * cart.quantities[index]).toFixed(2)}</p>
                 </span>
               </div>
             ))}
@@ -75,7 +75,7 @@ const cart = function () {
             <h6>Bill Details:</h6>
             <span>
               <p>Item Total</p>
-              <p>₹{cart.subTotal}</p>
+              <p>₹{cart.subTotal.toFixed(2)}</p>
             </span>
             <span>
               <p>Delivery Fee</p>
@@ -93,7 +93,7 @@ const cart = function () {
             <hr style={{ height: "3px", backgroundColor: "black" }} />
             <span>
               <h6>To Pay</h6>
-              <h6>₹{+total + +gstPrice}</h6>
+              <h6>₹{(+total + +gstPrice).toFixed(2)}</h6>
             </span>
             <button>
               <div>Checkout</div>
