@@ -8,3 +8,6 @@ export const IMAGE_API = function (id) {
 export const RESTAURANT_DETAILS = function (id) {
   return `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.7009403&lng=77.2721047&restaurantId=${id}`;
 };
+
+export const SEARCH_SUGGESTIONS =
+  "https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.7009403&lng=77.2721047&trackingId=null&str=";
