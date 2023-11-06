@@ -4,6 +4,11 @@
   padding-block: 10px;
   padding-inline: calc(10% + 36px);
   overflow-x: scroll;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+.header::-webkit-scrollbar {
+  display: none;
 }
 .sticky {
   position: fixed;
