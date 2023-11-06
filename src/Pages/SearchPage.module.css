@@ -1,0 +1,37 @@
+.container {
+  padding-inline: calc(15% + 36px);
+}
+.searchHeader {
+  padding-block: 48px 10px;
+}
+.sticky {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  right: 0;
+  background-color: white;
+  width: 100%;
+  padding: 20px 10%;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
+.searchBar {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+.searchBar > input {
+  width: 90%;
+  outline: none;
+  border: none;
+  color: #333;
+}
+@media (max-width: 796px) {
+  .container {
+    padding-inline: 10px;
+  }
+}
