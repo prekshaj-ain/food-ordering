@@ -6,6 +6,7 @@ import App from "./App";
 import SingleRestaurant from "./Pages/SingleRestaurant";
 import Home from "./Pages/Home";
 import Cart from "./Pages/Cart";
+import SearchPage from "./Pages/SearchPage";
 
 let appLayout = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ let appLayout = createBrowserRouter([
       {
         path: "/checkout",
         element: <Cart />,
+      },
+      {
+        path: "/search",
+        element: <SearchPage />,
       },
     ],
   },
