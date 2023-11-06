@@ -12,6 +12,15 @@ const Skeleton = function ({ type }) {
       </div>
     );
   }
+  if (type === "Suggestions") {
+    return (
+      <div>
+        {Array.from(Array(2)).map((e, index) => {
+          return <div className={styles.item} key={index}></div>;
+        })}
+      </div>
+    );
+  }
   if (type === "Single") {
     return (
       <Layout>
