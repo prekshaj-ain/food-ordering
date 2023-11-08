@@ -8,15 +8,25 @@ import styles from "./SearchPage.module.css";
 import { fetchSuggestions } from "../Store/apiCalls";
 import Suggestions from "../Components/Suggestions";
 import { useRef } from "react";
+import SearchResults from "../Components/SearchResults";
 
 const SearchPage = function () {
   const dispatch = useDispatch();
   const suggestionsCache = useSelector((store) => store.suggestions.cache);
   const [searchQuery, setSearchQuery] = useSearchParams();
   const [query, setQuery] = useState(searchQuery.get("query") || "");
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(true);
   const [isSticky, setIsSticky] = useState(false);
   const searchRef = useRef();
+  const resultsLoading = useSelector((store) => store.search.loading);
+  useEffect(() => {
+    setQuery(searchQuery.get("query"));
+  }, [searchQuery]);
+  useEffect(() => {
+    if (resultsLoading) {
+      setShowSuggestions(false);
+    }
+  }, [resultsLoading]);
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > searchRef.current.offsetTop) {
@@ -32,7 +42,7 @@ const SearchPage = function () {
     };
   }, []);
   useEffect(() => {
-    if (query.trim() !== "") {
+    if (query && query.trim() !== "") {
       const timer = setTimeout(() => {
         if (!suggestionsCache.hasOwnProperty(query)) {
           fetchSuggestions(dispatch, query);
@@ -70,7 +80,11 @@ const SearchPage = function () {
           <SearchIcon fontSize="small" color="disabled" />
         </div>
       </div>
-      {showSuggestions ? <Suggestions query={query} /> : <div></div>}
+      {showSuggestions ? (
+        <Suggestions query={query} setSearchQuery={setSearchQuery} />
+      ) : (
+        <SearchResults />
+      )}
     </div>
   );
 };
