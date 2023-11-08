@@ -6,12 +6,12 @@ import HighlightedText from "./HighlightedText";
 import { addRelatedInfo } from "../Store/Slices/searchSlice";
 import { fetchSearchResults } from "../Store/apiCalls";
 
-const Suggestions = function ({ query }) {
+const Suggestions = function ({ query, setSearchQuery }) {
   const dispatch = useDispatch();
   const loading = useSelector((store) => store.suggestions.loading);
   const suggestions = useSelector((store) => store.suggestions.cache[query]);
-  console.log(suggestions);
   const handleClick = function (metadata, type, query) {
+    setSearchQuery({ query: [query] });
     const info = {
       metadata,
       type,
@@ -21,7 +21,7 @@ const Suggestions = function ({ query }) {
     dispatch(addRelatedInfo(info));
     fetchSearchResults(dispatch, info);
   };
-  if (loading || !suggestions) {
+  if (loading) {
     return <Skeleton type="Suggestions" />;
   }
   return (
