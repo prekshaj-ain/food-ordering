@@ -12,13 +12,6 @@ const RestaurantListing = function () {
   const restaurants = useSelector(selectFilteredRestaurants);
   const loading = useSelector((store) => store.restaurants.loading);
   const [showFiltersModal, setShowFiltersModal] = useState(false);
-  if (restaurants.length == 0) {
-    return (
-      <Layout>
-        <Skeleton type="Posts" />;
-      </Layout>
-    );
-  }
   return (
     <div
       style={{
