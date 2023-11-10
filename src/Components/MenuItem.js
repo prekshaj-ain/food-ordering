@@ -9,7 +9,7 @@ import styles from "./MenuItem.module.css";
 import { addItem, removeItem, updateQuantity } from "../Store/Slices/cartSlice";
 import Modal from "./Modal";
 
-const MenuItem = function ({ item }) {
+const MenuItem = function ({ item, search }) {
   const dispatch = useDispatch();
   const currentRestaurant = useSelector((store) => store.app.currentRestaurant);
   const cartRestaurant = useSelector((store) => store.cart.restaurant);
@@ -57,7 +57,7 @@ const MenuItem = function ({ item }) {
   return (
     <div className={styles.container}>
       <div>
-        <div className={styles.details}>
+        <div className={`${styles.details} ${search ? styles.search : ""}`}>
           <div className={styles.tag}>
             <span>{isVeg ? <img src={VEG} /> : <img src={NONVEG} />}</span>
             {isBestseller && (
@@ -74,7 +74,7 @@ const MenuItem = function ({ item }) {
           <div className={styles.description}>{description}</div>
         </div>
         <div className={styles.image}>
-          <img src={IMAGE_API(imageId)} alt={name} />
+          <img src={IMAGE_API(imageId)} alt="" />
           {quantities[index] > 0 ? (
             <div className={`${styles.add} ${styles.quantity}`}>
               <button onClick={handleDecrement}>−</button>
@@ -88,7 +88,7 @@ const MenuItem = function ({ item }) {
           )}
         </div>
       </div>
-      <div className={styles.divider}></div>
+      {!search && <div className={styles.divider}></div>}
       {showModal && <Modal setShowModal={setShowModal} details={details} />}
     </div>
   );

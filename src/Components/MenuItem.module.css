@@ -16,6 +16,16 @@
   font-weight: bolder;
   color: #444;
 }
+.search {
+  max-height: 130px;
+}
+.search > .description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;
+}
 /* veg/nonveg */
 .tag {
   display: flex;
