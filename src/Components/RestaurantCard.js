@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { IMAGE_API } from "../Constants/endPoints";
 import styles from "./RestaurantCard.module.css";
 
-const RestaurantCard = function ({ details }) {
+const RestaurantCard = function ({ details, horizontal }) {
   let offer =
     details.aggregatedDiscountInfoV3 &&
     Object.values(details.aggregatedDiscountInfoV3).slice(0, 2);
@@ -19,7 +19,10 @@ const RestaurantCard = function ({ details }) {
   } = details;
   let image = IMAGE_API(imgId);
   return (
-    <Link to={`restaurants/${id}`} className={styles.card}>
+    <Link
+      to={`/restaurants/${id}`}
+      className={horizontal ? styles.horizontal : styles.card}
+    >
       <div className={styles.image}>
         <img src={image} alt={name} />
         {offer && (

@@ -1,4 +1,5 @@
-.card {
+.card,
+.horizontal {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -6,6 +7,27 @@
   overflow: hidden;
   min-width: 0;
   transition: transform ease 300ms;
+}
+.horizontal {
+  min-width: 100px;
+  flex-direction: row;
+  align-items: center;
+}
+.horizontal > .image {
+  width: 90px;
+  height: 90px;
+  aspect-ratio: 1/1;
+}
+.horizontal > .info {
+  width: 70%;
+  max-width: calc(100% - 140px);
+}
+.horizontal > .image > h6 {
+  display: none;
+}
+.horizontal > .info > *,
+.horizontal > .info > * > * {
+  font-size: 0.7rem !important;
 }
 .card:hover {
   transform: scale(0.95);
