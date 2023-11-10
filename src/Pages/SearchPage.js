@@ -1,14 +1,13 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./SearchPage.module.css";
-import { fetchSuggestions } from "../Store/apiCalls";
+import { fetchSearchResults, fetchSuggestions } from "../Store/apiCalls";
 import Suggestions from "../Components/Suggestions";
-import { useRef } from "react";
 import SearchResults from "../Components/SearchResults";
+import { addRelatedInfo } from "../Store/Slices/searchSlice";
 
 const SearchPage = function () {
   const dispatch = useDispatch();
@@ -61,6 +60,12 @@ const SearchPage = function () {
     if (e.key === "Enter" && query?.length > 0) {
       setSearchQuery({ ...searchQuery, query: query });
       setShowSuggestions(false);
+      const relatedinfo = {
+        submitAction: "ENTER",
+        str: query,
+      };
+      dispatch(addRelatedInfo(relatedinfo));
+      fetchSearchResults(dispatch, relatedinfo);
     }
   };
   return (
