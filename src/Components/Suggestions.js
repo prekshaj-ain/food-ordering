@@ -27,17 +27,13 @@ const Suggestions = function ({ query, setSearchQuery }) {
   return (
     <div className={styles.container}>
       {suggestions?.map((ele, index) => {
-        const {
-          highlightedText: text,
-          tagToDisplay: category,
-          cloudinaryId: imgId,
-        } = ele;
+        const { highlightedText: text, type, cloudinaryId: imgId } = ele;
         const metadata = ele.cta.link.split("&")[1];
         return (
           <button
             key={index}
             className={styles.item}
-            onClick={() => handleClick(metadata, category, ele.text)}
+            onClick={() => handleClick(metadata, type, ele.text)}
           >
             <div className={styles.image}>
               <img
@@ -50,7 +46,7 @@ const Suggestions = function ({ query, setSearchQuery }) {
             </div>
             <div>
               <HighlightedText text={text} />
-              <p style={{ textAlign: "left" }}>{category}</p>
+              <p style={{ textAlign: "left" }}>{type}</p>
             </div>
           </button>
         );
