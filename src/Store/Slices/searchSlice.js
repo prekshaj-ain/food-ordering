@@ -15,9 +15,9 @@ const searchSlice = createSlice({
   },
   reducers: {
     addRelatedInfo: (state, action) => {
-      state.relatedInfo.metadata = action.payload?.metadata;
+      state.relatedInfo.metadata = action.payload?.metadata || "";
       state.relatedInfo.submitAction = action.payload.submitAction;
-      state.relatedInfo.type = action.payload.type;
+      state.relatedInfo.type = action.payload?.type || "";
       state.relatedInfo.str = action.payload.str;
     },
     SEARCHRESULTS_FETCH_START: (state) => {
