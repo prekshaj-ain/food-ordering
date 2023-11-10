@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.menu {
+  display: flex;
+  gap: 10px;
+}
+.menu > * {
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+}
+.active {
+  background-color: rgba(0, 0, 0, 0.664);
+  color: white;
+  border: none;
+}
+.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 45%));
+  grid-gap: 10px;
+  justify-content: center;
+  background-color: #dddddd3d;
+  padding-block: 40px;
+}
+.card {
+  background-color: white;
+  padding: 30px 10px;
+}
