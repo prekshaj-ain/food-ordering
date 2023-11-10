@@ -8,6 +8,7 @@ import {
   SEARCHRESULTS_FETCH_FAIL,
   SEARCHRESULTS_FETCH_START,
   SEARCHRESULTS_FETCH_SUCCESS,
+  addRelatedInfo,
 } from "./Slices/searchSlice";
 import {
   SUGGESTIONS_FETCH_FAIL,
@@ -79,35 +80,37 @@ export const fetchSuggestions = async function (dispatch, query) {
 };
 
 export const fetchSearchResults = async function (dispatch, relatedInfo) {
-  console.log(relatedInfo);
   if (relatedInfo.submitAction === "ENTER") {
-    if (relatedInfo.type === "Retaurant") {
-      try {
-        dispatch(SEARCHRESULTS_FETCH_START());
-        const response = await fetch(
+    try {
+      dispatch(SEARCHRESULTS_FETCH_START());
+      let response, data;
+      if (relatedInfo.type) {
+        response = await fetch(
+          `https://www.swiggy.com/dapi/restaurants/search/v3?lat=28.7009403&lng=77.2721047&str=${relatedInfo.str}&trackingId=undefined&submitAction=ENTER&selectedPLTab=${relatedInfo.type}`
+        );
+        const json = await response.json();
+        data = json.data.cards;
+      } else {
+        response = await fetch(
           `https://www.swiggy.com/dapi/restaurants/search/v3?lat=28.7009403&lng=77.2721047&str=${relatedInfo.str}&trackingId=undefined&submitAction=ENTER`
         );
-        const data = await response.json();
-        const info = data.data.cards.at(-1).groupedCard.cardGroupMap.RESTAURANT;
-        console.log(info);
-      } catch (err) {
-        dispatch(SEARCHRESULTS_FETCH_FAIL(err));
-      }
-    } else if (relatedInfo.type === "Dish") {
-      try {
-        dispatch(SEARCHRESULTS_FETCH_START());
-        const response = await fetch(
-          `https://www.swiggy.com/dapi/restaurants/search/v3?lat=28.7009403&lng=77.2721047&str=${relatedInfo.str}&trackingId=undefined&submitAction=ENTER&selectedPLTab=DISH`
+        const json = await response.json();
+        data = json.data.cards;
+        const selected = data[0].card.card.tab.find((ele) =>
+          ele.hasOwnProperty("selected")
         );
-        const data = await response.json();
-        const info = data.data.cards.at(-1).groupedCard.cardGroupMap.DISH;
-        console.log(info);
-      } catch (err) {
-        dispatch(SEARCHRESULTS_FETCH_FAIL(err));
+        let info = relatedInfo;
+        info.type = selected.id;
+        dispatch(addRelatedInfo(info));
       }
+      const details = data.at(-1).groupedCard.cardGroupMap[selected.id];
+      console.log(details);
+      dispatch(SEARCHRESULTS_FETCH_SUCCESS(details.cards));
+    } catch (err) {
+      dispatch(SEARCHRESULTS_FETCH_FAIL(err));
     }
   } else if (relatedInfo.submitAction === "SUGGESTION") {
-    if (relatedInfo.type === "Restaurant") {
+    if (relatedInfo.type === "RESTAURANT") {
       try {
         dispatch(SEARCHRESULTS_FETCH_START());
         const response = await fetch(
@@ -120,7 +123,7 @@ export const fetchSearchResults = async function (dispatch, relatedInfo) {
       } catch (err) {
         dispatch(SEARCHRESULTS_FETCH_FAIL(err));
       }
-    } else if (relatedInfo.type === "Dish") {
+    } else if (relatedInfo.type === "DISH") {
       try {
         dispatch(SEARCHRESULTS_FETCH_START());
         const response = await fetch(
