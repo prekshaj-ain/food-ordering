@@ -55,7 +55,7 @@ const SearchResults = function () {
         <div className={styles.content}>
           {data?.map((item, index) => (
             <div key={index} className={styles.card}>
-              <MenuItem item={item.card} search={true} />
+              <MenuItem item={item.card} search={true} extended={true} />
             </div>
           ))}
         </div>

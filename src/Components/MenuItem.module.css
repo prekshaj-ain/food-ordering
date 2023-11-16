@@ -1,7 +1,19 @@
 .container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-.container > *:first-child {
+.container > .restaurantDetails {
+  border-bottom: 1px dotted #444;
+  padding: 10px;
+}
+.restaurantDetails > * > * {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.container > * {
   display: flex;
   align-items: start;
   justify-content: space-between;

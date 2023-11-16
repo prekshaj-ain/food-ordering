@@ -1,5 +1,7 @@
 import StarIcon from "@mui/icons-material/Star";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import VEG from "../Constants/Assets/veg.png";
@@ -9,14 +11,14 @@ import styles from "./MenuItem.module.css";
 import { addItem, removeItem, updateQuantity } from "../Store/Slices/cartSlice";
 import Modal from "./Modal";
 
-const MenuItem = function ({ item, search }) {
+const MenuItem = function ({ item, search, extended }) {
   const dispatch = useDispatch();
   const currentRestaurant = useSelector((store) => store.app.currentRestaurant);
   const cartRestaurant = useSelector((store) => store.cart.restaurant);
   const quantities = useSelector((store) => store.cart.quantities);
   const items = useSelector((store) => store.cart.items);
   const [showModal, setShowModal] = useState(false);
-  let { info } = item?.card;
+  let { info, restaurant = null } = item?.card;
   let {
     isVeg,
     isBestseller,
@@ -56,6 +58,26 @@ const MenuItem = function ({ item, search }) {
 
   return (
     <div className={styles.container}>
+      {extended && (
+        <Link
+          to={`/restaurants/${restaurant.info.id}`}
+          className={styles.restaurantDetails}
+        >
+          <div>
+            <p style={{ fontWeight: "bold" }}>By {restaurant.info.name}</p>
+            <div>
+              <StarIcon fontSize="10px" color="disabled" />
+              <p>
+                {restaurant.info.avgRating} .{" "}
+                {restaurant.info.costForTwoMessage}
+              </p>
+            </div>
+          </div>
+          <span>
+            <ArrowForwardIcon color="disabled" />
+          </span>
+        </Link>
+      )}
       <div>
         <div className={`${styles.details} ${search ? styles.search : ""}`}>
           <div className={styles.tag}>
