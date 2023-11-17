@@ -1,0 +1,19 @@
+.connectionModal {
+  position: fixed;
+  bottom: 20px;
+  background-color: black;
+  color: white;
+  left: 50%;
+  font-size: 0.7rem;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
+  max-width: 400px;
+  width: 80%;
+}
+.connectionModal > *:first-child {
+  font-weight: bold;
+}
