@@ -53,3 +53,9 @@
   color: orange;
   cursor: pointer;
 }
+
+@media (max-width: 769px) {
+  .header {
+    padding-inline: 10px;
+  }
+}
