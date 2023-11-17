@@ -2,10 +2,10 @@ import StarIcon from "@mui/icons-material/Star";
 import InfoIcon from "@mui/icons-material/Info";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 import styles from "./RestaurantHeader.module.css";
 import { setCurrentRestaurant } from "../Store/Slices/appSlice";
-import { useEffect } from "react";
 
 const RestaurantHeader = function ({ info }) {
   let {
