@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
+import COOKING from "../Constants/Assets/cooking.png";
 import VEG from "../Constants/Assets/veg.png";
 import NONVEG from "../Constants/Assets/nonveg.png";
 import Layout from "../Components/Layout";
@@ -9,7 +9,15 @@ import { IMAGE_API } from "../Constants/endPoints";
 import { removeItem, updateQuantity } from "../Store/Slices/cartSlice";
 const cart = function () {
   const cart = useSelector((store) => store.cart);
-  if (cart.restaurant === null) return null;
+  if (cart.restaurant === null)
+    return (
+      <div className={styles.empty}>
+        <img src={COOKING} />
+        <h6>Your cart is empty</h6>
+        <p>You can go home and view more restaurants</p>
+        <Link to="/">Go Home</Link>
+      </div>
+    );
   const dispatch = useDispatch();
   const { id, name, areaName, imgId, deliveryCharge } = cart.restaurant;
   const total = cart.subTotal + deliveryCharge + 5;
