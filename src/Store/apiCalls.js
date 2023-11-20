@@ -31,7 +31,6 @@ export const fetchRestaurants = async (dispatch) => {
         restaurants = ele.card.card.gridElements.infoWithStyle.restaurants;
       }
     }
-    console.log(collection);
     let ids = collection?.map((ele) =>
       ele.action.link.split("?")[1].substr(14)
     );
@@ -57,7 +56,6 @@ export const fetchMoreRestaurants = async (dispatch, offset, id) => {
     );
     restaurants = restaurants.map((restaurant) => restaurant.card.card);
 
-    console.log(restaurants);
     dispatch(FETCH_SUCCESS({ restaurants, nextOffset }));
   } catch (err) {
     dispatch(FETCH_FAIL(err));
@@ -104,7 +102,6 @@ export const fetchSearchResults = async function (dispatch, relatedInfo) {
         dispatch(addRelatedInfo(info));
       }
       const details = data.at(-1).groupedCard.cardGroupMap[selected.id];
-      console.log(details);
       dispatch(SEARCHRESULTS_FETCH_SUCCESS(details.cards));
     } catch (err) {
       dispatch(SEARCHRESULTS_FETCH_FAIL(err));
@@ -119,7 +116,6 @@ export const fetchSearchResults = async function (dispatch, relatedInfo) {
         const data = await response.json();
         const info = data.data.cards.at(-1).groupedCard.cardGroupMap.RESTAURANT;
         dispatch(SEARCHRESULTS_FETCH_SUCCESS(info.cards));
-        console.log(info);
       } catch (err) {
         dispatch(SEARCHRESULTS_FETCH_FAIL(err));
       }
@@ -133,7 +129,6 @@ export const fetchSearchResults = async function (dispatch, relatedInfo) {
         const info = data.data.cards.at(-1).groupedCard.cardGroupMap.DISH;
         info.cards.shift();
         dispatch(SEARCHRESULTS_FETCH_SUCCESS(info.cards));
-        console.log(info);
       } catch (err) {
         dispatch(SEARCHRESULTS_FETCH_FAIL(err));
       }

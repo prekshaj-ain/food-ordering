@@ -16,7 +16,6 @@ const SearchResults = function () {
     return <Skeleton type="Search" />;
   }
   const handleClick = function (clickedType) {
-    console.log(type, clickedType);
     if (type == clickedType) {
       return;
     } else {

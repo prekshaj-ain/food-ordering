@@ -19,7 +19,6 @@ const SingleRestaurant = function () {
       let response = await fetch(RESTAURANT_DETAILS(id));
       let data = await response.json();
       setDetails(data.data.cards);
-      console.log(data.data.cards);
     }
   }, [id]);
 

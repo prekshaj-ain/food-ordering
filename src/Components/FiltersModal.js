@@ -22,7 +22,6 @@ const FiltersModal = function ({ setShow }) {
     setActiveList(type);
   };
   const handleCheck = function (e, value) {
-    console.log(e.target.checked);
     if (e.target.checked) {
       if (e.target.type === "checkbox" && selectedFilter[activeList]) {
         let newVal = [...selectedFilter[activeList], value];
@@ -43,7 +42,6 @@ const FiltersModal = function ({ setShow }) {
       });
     }
   };
-  console.log(selectedFilter);
   const handleCancel = function () {
     dispatch(clearFilters());
     setShowAlert(true);
