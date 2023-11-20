@@ -22,6 +22,7 @@ const FiltersModal = function ({ setShow }) {
     setActiveList(type);
   };
   const handleCheck = function (e, value) {
+    console.log(e.target.checked);
     if (e.target.checked) {
       if (e.target.type === "checkbox" && selectedFilter[activeList]) {
         let newVal = [...selectedFilter[activeList], value];
@@ -33,8 +34,16 @@ const FiltersModal = function ({ setShow }) {
           return { ...prev, [activeList]: [value] };
         });
       }
+    } else {
+      setSelectedFilter((prev) => {
+        return {
+          ...prev,
+          [activeList]: prev[activeList].filter((option) => option !== value),
+        };
+      });
     }
   };
+  console.log(selectedFilter);
   const handleCancel = function () {
     dispatch(clearFilters());
     setShowAlert(true);
