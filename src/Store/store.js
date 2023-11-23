@@ -14,6 +14,7 @@ const store = configureStore({
     suggestions: suggestionsSlice,
     search: searchSlice,
   },
+  devTools: process.env.MODE !== "production",
 });
 
 export default store;
