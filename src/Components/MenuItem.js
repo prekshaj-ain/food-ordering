@@ -10,6 +10,8 @@ import { IMAGE_API } from "../Constants/endPoints";
 import styles from "./MenuItem.module.css";
 import { addItem, removeItem, updateQuantity } from "../Store/Slices/cartSlice";
 import Modal from "./Modal";
+import { setCurrentRestaurant } from "../Store/Slices/appSlice";
+import { current } from "@reduxjs/toolkit";
 
 const MenuItem = function ({ item, search, extended }) {
   const dispatch = useDispatch();
@@ -29,15 +31,25 @@ const MenuItem = function ({ item, search, extended }) {
     imageId,
     id,
   } = info;
-
   const index = items.findIndex((item) => item.id === id);
-  const details = {
-    restaurant: currentRestaurant,
+  let fees = restaurant?.info?.feeDetails?.fees?.totalFee || 0;
+  let currRes = restaurant
+    ? {
+        id: restaurant.info.id,
+        name: restaurant.info.name,
+        areaName: restaurant.info.areaName,
+        imgId: restaurant.info.cloudinaryImageId,
+        deliveryCharge: fees / 100,
+      }
+    : currentRestaurant;
+  let details = {
+    restaurant: currRes,
     item: { id, isVeg, name, price: price / 100 || defaultPrice / 100 },
     quantity: 1,
   };
   const handleClick = function () {
-    if (cartRestaurant === null || currentRestaurant.id === cartRestaurant.id) {
+    dispatch(setCurrentRestaurant(currRes));
+    if (cartRestaurant == null || currRes.id == cartRestaurant.id) {
       dispatch(addItem(details));
     } else {
       setShowModal(true);
