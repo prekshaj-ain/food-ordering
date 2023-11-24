@@ -16,6 +16,7 @@
 .action {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 .action > button {
   width: 45%;
