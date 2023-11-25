@@ -8,8 +8,8 @@ import { fetchSearchResults } from "../Store/apiCalls";
 import Skeleton from "./Skeleton";
 const SearchResults = function () {
   const dispatch = useDispatch();
-  const info = useSelector((store) => store.search.relatedInfo);
-  const { type } = info;
+  const type = useSelector((store) => store.search.type);
+  const str = useSelector((store) => store.search.str);
   const data = useSelector((store) => store.search.data);
   const loading = useSelector((store) => store.search.loading);
   if (loading) {
@@ -19,9 +19,8 @@ const SearchResults = function () {
     if (type == clickedType) {
       return;
     } else {
-      const relatedinfo = { ...info, type: clickedType };
-      dispatch(addRelatedInfo(relatedinfo));
-      fetchSearchResults(dispatch, relatedinfo);
+      dispatch(addRelatedInfo({ str, type: clickedType }));
+      fetchSearchResults(dispatch, str, clickedType);
     }
   };
   return (

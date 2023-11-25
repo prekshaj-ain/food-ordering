@@ -60,12 +60,8 @@ const SearchPage = function () {
     if (e.key === "Enter" && query?.length > 0) {
       setSearchQuery({ ...searchQuery, query: query });
       setShowSuggestions(false);
-      const relatedinfo = {
-        submitAction: "ENTER",
-        str: query,
-      };
-      dispatch(addRelatedInfo(relatedinfo));
-      fetchSearchResults(dispatch, relatedinfo);
+      dispatch(addRelatedInfo({ str: query, type: "DISH" }));
+      fetchSearchResults(dispatch, query, "DISH");
     }
   };
   return (

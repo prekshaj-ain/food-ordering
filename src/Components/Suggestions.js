@@ -13,13 +13,11 @@ const Suggestions = function ({ query, setSearchQuery }) {
   const handleClick = function (metadata, type, query) {
     setSearchQuery({ query: [query] });
     const info = {
-      metadata,
-      type,
-      submitAction: "SUGGESTION",
       str: query,
+      type,
     };
     dispatch(addRelatedInfo(info));
-    fetchSearchResults(dispatch, info);
+    fetchSearchResults(dispatch, query, type);
   };
   if (loading) {
     return <Skeleton type="Suggestions" />;
