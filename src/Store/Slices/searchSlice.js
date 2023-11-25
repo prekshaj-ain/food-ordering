@@ -3,22 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const searchSlice = createSlice({
   name: "search",
   initialState: {
-    relatedInfo: {
-      metadata: null,
-      submitAction: "",
-      type: "",
-      str: "",
-    },
+    str: "",
+    type: "",
     data: null,
     loading: false,
     error: null,
   },
   reducers: {
     addRelatedInfo: (state, action) => {
-      state.relatedInfo.metadata = action.payload?.metadata || "";
-      state.relatedInfo.submitAction = action.payload.submitAction;
-      state.relatedInfo.type = action.payload?.type || "";
-      state.relatedInfo.str = action.payload.str;
+      state.str = action.payload.str;
+      state.type = action.payload?.type || "";
     },
     SEARCHRESULTS_FETCH_START: (state) => {
       state.loading = true;
