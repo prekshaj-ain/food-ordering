@@ -44,7 +44,7 @@ export const fetchMoreRestaurants = async (dispatch, offset, id) => {
   dispatch(FETCH_START());
   try {
     const response = await fetch(
-      `https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7009403&lng=77.2721047&collection=${id}&sortBy=&filters=&offset=0&page_type=null`
+      `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7009403&lng=77.2721047&collection=${id}&sortBy=&filters=&offset=0&page_type=null`
     );
     const data = await response.json();
     const cards = data.data.cards;
@@ -77,61 +77,28 @@ export const fetchSuggestions = async function (dispatch, query) {
   }
 };
 
-export const fetchSearchResults = async function (dispatch, relatedInfo) {
-  if (relatedInfo.submitAction === "ENTER") {
-    try {
-      dispatch(SEARCHRESULTS_FETCH_START());
-      let response, data;
-      if (relatedInfo.type) {
-        response = await fetch(
-          `https://www.swiggy.com/dapi/restaurants/search/v3?lat=28.7009403&lng=77.2721047&str=${relatedInfo.str}&trackingId=undefined&submitAction=ENTER&selectedPLTab=${relatedInfo.type}`
-        );
-        const json = await response.json();
-        data = json.data.cards;
-      } else {
-        response = await fetch(
-          `https://www.swiggy.com/dapi/restaurants/search/v3?lat=28.7009403&lng=77.2721047&str=${relatedInfo.str}&trackingId=undefined&submitAction=ENTER`
-        );
-        const json = await response.json();
-        data = json.data.cards;
-        const selected = data[0].card.card.tab.find((ele) =>
-          ele.hasOwnProperty("selected")
-        );
-        let info = relatedInfo;
-        info.type = selected.id;
-        dispatch(addRelatedInfo(info));
-      }
-      const details = data.at(-1).groupedCard.cardGroupMap[selected.id];
-      dispatch(SEARCHRESULTS_FETCH_SUCCESS(details.cards));
-    } catch (err) {
-      dispatch(SEARCHRESULTS_FETCH_FAIL(err));
+export const fetchSearchResults = async function (dispatch, str, type) {
+  try {
+    dispatch(SEARCHRESULTS_FETCH_START());
+    const data = await fetch(
+      `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/search/v3?lat=12.9715987&lng=77.5945627&str=${str}&trackingId=undefined&submitAction=SUGGESTION&queryUniqueId=bc9bbc65-5d8b-0aa5-bbdc-65b467e6afdb&selectedPLTab=${type}`
+    );
+    const json = await data.json();
+    if (type == "RESTAURANT") {
+      console.log(
+        json?.data?.cards.at(-1)?.groupedCard?.cardGroupMap?.RESTAURANT
+      );
+      dispatch(
+        SEARCHRESULTS_FETCH_SUCCESS(
+          json?.data?.cards.at(-1)?.groupedCard?.cardGroupMap?.RESTAURANT.cards
+        )
+      );
+    } else if (type == "DISH") {
+      let info = json?.data?.cards.at(-1)?.groupedCard?.cardGroupMap?.DISH;
+      info.cards.shift();
+      dispatch(SEARCHRESULTS_FETCH_SUCCESS(info.cards));
     }
-  } else if (relatedInfo.submitAction === "SUGGESTION") {
-    if (relatedInfo.type === "RESTAURANT") {
-      try {
-        dispatch(SEARCHRESULTS_FETCH_START());
-        const response = await fetch(
-          `https://www.swiggy.com/dapi/restaurants/search/v3?lat=28.7009403&lng=77.2721047&str=${relatedInfo.str}&trackingId=undefined&submitAction=SUGGESTION&${relatedInfo.metadata}&selectedPLTab=RESTAURANT`
-        );
-        const data = await response.json();
-        const info = data.data.cards.at(-1).groupedCard.cardGroupMap.RESTAURANT;
-        dispatch(SEARCHRESULTS_FETCH_SUCCESS(info.cards));
-      } catch (err) {
-        dispatch(SEARCHRESULTS_FETCH_FAIL(err));
-      }
-    } else if (relatedInfo.type === "DISH") {
-      try {
-        dispatch(SEARCHRESULTS_FETCH_START());
-        const response = await fetch(
-          `https://www.swiggy.com/dapi/restaurants/search/v3?lat=28.7009403&lng=77.2721047&str=${relatedInfo.str}&trackingId=undefined&submitAction=SUGGESTION&${relatedInfo.metadata}&selectedPLTab=DISH`
-        );
-        const data = await response.json();
-        const info = data.data.cards.at(-1).groupedCard.cardGroupMap.DISH;
-        info.cards.shift();
-        dispatch(SEARCHRESULTS_FETCH_SUCCESS(info.cards));
-      } catch (err) {
-        dispatch(SEARCHRESULTS_FETCH_FAIL(err));
-      }
-    }
+  } catch (err) {
+    dispatch(SEARCHRESULTS_FETCH_FAIL(err));
   }
 };
