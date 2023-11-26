@@ -22,41 +22,53 @@ export const fetchRestaurants = async (dispatch) => {
     const response = await fetch(HOMEPAGE_API);
     const data = await response.json();
     const cards = data.data.cards;
-    let nextOffset = 0;
-    let restaurants, collection;
+    let nextOffset = data.data.pageOffset.nextOffset;
+    let restaurants;
     for (let ele of cards) {
-      if (ele.card.card.id === "whats_on_your_mind") {
-        collection = ele.card.card.gridElements.infoWithStyle.info;
-      } else if (ele.card.card.id === "restaurant_grid_listing") {
+      if (ele.card.card.id === "restaurant_grid_listing") {
         restaurants = ele.card.card.gridElements.infoWithStyle.restaurants;
       }
     }
-    let ids = collection?.map((ele) =>
-      ele.action.link.split("?")[1].substr(14)
-    );
-    dispatch(FETCH_SUCCESS({ restaurants, nextOffset, ids }));
+    dispatch(FETCH_SUCCESS({ restaurants, nextOffset, page: 10 }));
   } catch (err) {
     dispatch(FETCH_FAIL(err));
   }
 };
 
-export const fetchMoreRestaurants = async (dispatch, offset, id) => {
+export const fetchMoreRestaurants = async (dispatch, offset, page) => {
   dispatch(FETCH_START());
   try {
     const response = await fetch(
-      `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7009403&lng=77.2721047&collection=${id}&sortBy=&filters=&offset=0&page_type=null`
+      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/update",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          lat: 12.9715987,
+          lng: 77.5945627,
+          nextOffset: offset,
+          seoParams: {
+            apiName: "FoodHomePage",
+            pageType: "FOOD_HOMEPAGE",
+            seoUrl: "https://www.swiggy.com/",
+          },
+          widgetOffset: {
+            NewListingView_Topical_Fullbleed: "",
+            NewListingView_category_bar_chicletranking_TwoRows: "",
+            NewListingView_category_bar_chicletranking_TwoRows_Rendition: "",
+            collectionV5RestaurantListWidget_SimRestoRelevance_food_seo:
+              String(page),
+          },
+        }),
+      }
     );
     const data = await response.json();
-    const cards = data.data.cards;
-    let nextOffset = offset + 1;
-    let restaurants = cards.filter(
-      (ele) =>
-        ele.card.card.hasOwnProperty("widgetId") &&
-        ele.card.card.widgetId.includes("collectionV5RestaurantListWidget")
-    );
-    restaurants = restaurants.map((restaurant) => restaurant.card.card);
-
-    dispatch(FETCH_SUCCESS({ restaurants, nextOffset }));
+    let restaurants =
+      data.data.cards[0].card.card.gridElements.infoWithStyle.restaurants;
+    let nextOffset = data.data.pageOffset.nextOffset;
+    dispatch(FETCH_SUCCESS({ restaurants, nextOffset, page: page + 15 }));
   } catch (err) {
     dispatch(FETCH_FAIL(err));
   }

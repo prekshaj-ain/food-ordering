@@ -6,27 +6,28 @@ import { fetchMoreRestaurants, fetchRestaurants } from "../Store/apiCalls";
 
 const Home = function () {
   const nextOffset = useSelector((store) => store.restaurants.nextOffset);
-  const moreIds = useSelector((store) => store.restaurants.moreDataIds);
+  const page = useSelector((store) => store.restaurants.page);
   const dispatch = useDispatch();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   useEffect(() => {
     if (nextOffset === null) fetchRestaurants(dispatch);
   }, []);
   useEffect(() => {
     const handler = function () {
       if (
-        window.innerHeight + document.documentElement.scrollTop ===
+        window.innerHeight + document.documentElement.scrollTop + 1 >=
         document.documentElement.offsetHeight
       ) {
-        if (moreIds.length > nextOffset) {
-          fetchMoreRestaurants(dispatch, nextOffset, moreIds[nextOffset]);
-        }
+        fetchMoreRestaurants(dispatch, nextOffset, page);
       }
     };
     document.addEventListener("scroll", handler);
     return () => {
       document.removeEventListener("scroll", handler);
     };
-  }, [dispatch, nextOffset]);
+  }, [nextOffset, page]);
   return <RestaurantListing />;
 };
 
