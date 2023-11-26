@@ -21,7 +21,7 @@
 }
 .content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 45%));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 45%));
   grid-gap: 10px;
   justify-content: center;
   background-color: #dddddd3d;
