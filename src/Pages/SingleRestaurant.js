@@ -14,6 +14,9 @@ const SingleRestaurant = function () {
   let { id } = useParams();
   let [details, setDetails] = useState();
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
     fetchRestaurant();
     async function fetchRestaurant() {
       let response = await fetch(RESTAURANT_DETAILS(id));

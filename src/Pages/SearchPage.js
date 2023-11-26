@@ -19,6 +19,9 @@ const SearchPage = function () {
   const searchRef = useRef();
   const resultsLoading = useSelector((store) => store.search.loading);
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
     setQuery(searchQuery.get("query"));
   }, [searchQuery]);
   useEffect(() => {
