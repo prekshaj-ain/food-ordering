@@ -37,7 +37,7 @@ const SingleRestaurant = function () {
         <footer className={styles.cartFooter}>
           <div>
             <span>
-              {items.length} Items | ₹{subTotal}
+              {items.length} Items | ₹{subTotal.toFixed(2)}
             </span>
             <Link to="/checkout">VIEW CART</Link>
           </div>
