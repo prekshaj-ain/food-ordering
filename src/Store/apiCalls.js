@@ -46,9 +46,9 @@ export const fetchMoreRestaurants = async (dispatch, offset, page) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          lat: 12.9715987,
-          lng: 77.5945627,
-          nextOffset: offset,
+          lat: 28.7009403,
+          lng: 77.2721047,
+          nextOffset: "COVCELQ4KICY8/SXqZnTOzClEzgC",
           seoParams: {
             apiName: "FoodHomePage",
             pageType: "FOOD_HOMEPAGE",
@@ -58,8 +58,11 @@ export const fetchMoreRestaurants = async (dispatch, offset, page) => {
             NewListingView_Topical_Fullbleed: "",
             NewListingView_category_bar_chicletranking_TwoRows: "",
             NewListingView_category_bar_chicletranking_TwoRows_Rendition: "",
+            Restaurant_Group_WebView_SEO_PB_Theme: "",
             collectionV5RestaurantListWidget_SimRestoRelevance_food_seo:
               String(page),
+            inlineFacetFilter: "",
+            restaurantCountWidget: "",
           },
         }),
       }
