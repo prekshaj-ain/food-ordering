@@ -6,9 +6,7 @@ import MenuItem from "./MenuItem";
 
 const MenuCategory = function ({ category, subCat, veg }) {
   let { title, itemCards: items, categories } = category;
-  if (veg && items) {
-    items = items.filter((item) => item.card.info.isVeg === 1);
-  }
+
   const [show, setShow] = useState(true);
   const handleClick = function () {
     setShow((prev) => !prev);
@@ -25,11 +23,16 @@ const MenuCategory = function ({ category, subCat, veg }) {
           </button>
           {show &&
             categories?.map((cat, index) => {
-              return <MenuCategory key={index} category={cat} subCat />;
+              return (
+                <MenuCategory key={index} category={cat} subCat veg={veg} />
+              );
             })}
         </div>
       </div>
     );
+  }
+  if (veg && items) {
+    items = items.filter((item) => item.card.info.isVeg === 1);
   }
   return (
     <div>
