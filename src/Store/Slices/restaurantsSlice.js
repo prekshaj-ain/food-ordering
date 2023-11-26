@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const restaurantsSlice = createSlice({
   name: "restaurants",
   initialState: {
-    moreDataIds: [],
     data: [],
     filters: {
       Sort: ["Relevance"],
     },
     nextOffset: null,
+    page: 10,
     loading: false,
     error: null,
   },
@@ -18,11 +18,9 @@ const restaurantsSlice = createSlice({
       state.error = null;
     },
     FETCH_SUCCESS: (state, action) => {
-      if (action.payload.ids) {
-        state.moreDataIds = action.payload.ids;
-      }
       state.data.push(...action.payload.restaurants);
       state.nextOffset = action.payload.nextOffset;
+      state.page = action.payload.page;
       state.loading = false;
       state.error = false;
     },
