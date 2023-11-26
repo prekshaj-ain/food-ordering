@@ -30,9 +30,9 @@ const appSlice = createSlice({
       "Cost for two": {
         type: "checkbox",
         subFilter: [
+          { title: "Less than Rs. 300" },
           { title: "Rs. 300-Rs. 600" },
           { title: "Greater than Rs. 600" },
-          { title: "Less than Rs. 300" },
         ],
       },
     },
