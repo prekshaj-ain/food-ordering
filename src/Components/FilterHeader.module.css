@@ -33,7 +33,7 @@
 .expand {
   border: 1px solid #9999993d;
   border-radius: 10px;
-  position: absolute;
+  position: fixed;
   z-index: 2;
   background-color: white;
   padding-block: 10px;
@@ -52,6 +52,9 @@
 .action {
   color: orange;
   cursor: pointer;
+}
+.tagname {
+  text-wrap: nowrap;
 }
 
 @media (max-width: 769px) {

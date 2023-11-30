@@ -114,7 +114,7 @@ const FilterHeader = function ({ setShow }) {
         if (filter == "Sort") return;
         return activefilters[filter].map((val, index) => (
           <TagButton key={index} active>
-            <p>{val}</p>
+            <p className={styles.tagname}>{val}</p>
             <span onClick={() => handleRemove(filter, val)}>
               <CloseIcon className={styles.icon} />
             </span>
