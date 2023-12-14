@@ -26,13 +26,15 @@ const SingleRestaurant = function () {
   }, [id]);
 
   if (!details) return <Skeleton type="Single" />;
+  let info = details.find(
+    (detail) =>
+      detail?.card?.card["@type"] ==
+      "type.googleapis.com/swiggy.presentation.food.v2.Restaurant"
+  );
+  console.log(info);
   return (
     <Layout>
-      <RestaurantDetails
-        info={details[0]}
-        offers={details[1]}
-        menu={details.at(-1).groupedCard}
-      />
+      <RestaurantDetails info={info} menu={details.at(-1).groupedCard} />
       {items.length > 0 && (
         <footer className={styles.cartFooter}>
           <div>
