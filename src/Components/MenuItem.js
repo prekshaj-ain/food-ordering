@@ -11,7 +11,6 @@ import styles from "./MenuItem.module.css";
 import { addItem, removeItem, updateQuantity } from "../Store/Slices/cartSlice";
 import Modal from "./Modal";
 import { setCurrentRestaurant } from "../Store/Slices/appSlice";
-import { current } from "@reduxjs/toolkit";
 
 const MenuItem = function ({ item, search, extended }) {
   const dispatch = useDispatch();
@@ -31,6 +30,7 @@ const MenuItem = function ({ item, search, extended }) {
     imageId,
     id,
   } = info;
+  let img = IMAGE_API(imageId);
   const index = items.findIndex((item) => item.id === id);
   let fees = restaurant?.info?.feeDetails?.fees?.totalFee || 0;
   let currRes = restaurant
@@ -108,7 +108,12 @@ const MenuItem = function ({ item, search, extended }) {
           <div className={styles.description}>{description}</div>
         </div>
         <div className={styles.image}>
-          <img src={IMAGE_API(imageId)} alt="" />
+          {imageId && (
+            <img
+              src={IMAGE_API(imageId)}
+              style={{ backgroundColor: "lightgray" }}
+            />
+          )}
           {quantities[index] > 0 ? (
             <div className={`${styles.add} ${styles.quantity}`}>
               <button onClick={handleDecrement}>−</button>
