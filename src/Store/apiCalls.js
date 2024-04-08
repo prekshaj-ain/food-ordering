@@ -39,7 +39,7 @@ export const fetchMoreRestaurants = async (dispatch, offset, page) => {
   dispatch(FETCH_START());
   try {
     const response = await fetch(
-      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/update",
+      "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/update",
       {
         method: "POST",
         headers: {
@@ -96,7 +96,7 @@ export const fetchSearchResults = async function (dispatch, str, type) {
   try {
     dispatch(SEARCHRESULTS_FETCH_START());
     const data = await fetch(
-      `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/search/v3?lat=12.9715987&lng=77.5945627&str=${str}&trackingId=undefined&submitAction=SUGGESTION&queryUniqueId=bc9bbc65-5d8b-0aa5-bbdc-65b467e6afdb&selectedPLTab=${type}`
+      `https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/search/v3?lat=12.9715987&lng=77.5945627&str=${str}&trackingId=undefined&submitAction=SUGGESTION&queryUniqueId=bc9bbc65-5d8b-0aa5-bbdc-65b467e6afdb&selectedPLTab=${type}`
     );
     const json = await data.json();
     if (type == "RESTAURANT") {
