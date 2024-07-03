@@ -19,7 +19,11 @@ import {
 export const fetchRestaurants = async (dispatch) => {
   dispatch(FETCH_START());
   try {
-    const response = await fetch(HOMEPAGE_API);
+    const response = await fetch(HOMEPAGE_API, {
+      headers: {
+        "x-cors-api-key": "temp_7eed9251d3646d91ea47c4dec8334fea",
+      },
+    });
     const data = await response.json();
     const cards = data.data.cards;
     let nextOffset = data.data.pageOffset.nextOffset;
@@ -39,7 +43,7 @@ export const fetchMoreRestaurants = async (dispatch, offset, page) => {
   dispatch(FETCH_START());
   try {
     const response = await fetch(
-      "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/update",
+      "https://api.allorigins.win/raw?url=https://www.swiggy.com/dapi/restaurants/list/update",
       {
         method: "POST",
         headers: {
@@ -80,7 +84,11 @@ export const fetchMoreRestaurants = async (dispatch, offset, page) => {
 export const fetchSuggestions = async function (dispatch, query) {
   try {
     dispatch(SUGGESTIONS_FETCH_START());
-    const response = await fetch(SEARCH_SUGGESTIONS + query);
+    const response = await fetch(SEARCH_SUGGESTIONS + query, {
+      headers: {
+        "x-cors-api-key": "temp_7eed9251d3646d91ea47c4dec8334fea",
+      },
+    });
     const data = await response.json();
     const suggestions = data.data?.suggestions;
     const active = suggestions.filter(
@@ -96,7 +104,12 @@ export const fetchSearchResults = async function (dispatch, str, type) {
   try {
     dispatch(SEARCHRESULTS_FETCH_START());
     const data = await fetch(
-      `https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/search/v3?lat=12.9715987&lng=77.5945627&str=${str}&trackingId=undefined&submitAction=SUGGESTION&queryUniqueId=bc9bbc65-5d8b-0aa5-bbdc-65b467e6afdb&selectedPLTab=${type}`
+      `https://proxy.cors.sh/https://www.swiggy.com/dapi/restaurants/search/v3?lat=12.9715987&lng=77.5945627&str=${str}&trackingId=undefined&submitAction=SUGGESTION&queryUniqueId=bc9bbc65-5d8b-0aa5-bbdc-65b467e6afdb&selectedPLTab=${type}`,
+      {
+        headers: {
+          "x-cors-api-key": "temp_7eed9251d3646d91ea47c4dec8334fea",
+        },
+      }
     );
     const json = await data.json();
     if (type == "RESTAURANT") {

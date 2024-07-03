@@ -19,7 +19,11 @@ const SingleRestaurant = function () {
   useEffect(() => {
     fetchRestaurant();
     async function fetchRestaurant() {
-      let response = await fetch(RESTAURANT_DETAILS(id));
+      let response = await fetch(RESTAURANT_DETAILS(id), {
+        headers: {
+          "x-cors-api-key": "temp_7eed9251d3646d91ea47c4dec8334fea",
+        },
+      });
       let data = await response.json();
       setDetails(data.data.cards);
     }

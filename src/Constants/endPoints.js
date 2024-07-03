@@ -1,13 +1,13 @@
 export const HOMEPAGE_API =
-  "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7009403&lng=77.2721047&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
+  "https://proxy.cors.sh/https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7009403&lng=77.2721047&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
 
 export const IMAGE_API = function (id) {
   return `https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${id}`;
 };
 
 export const RESTAURANT_DETAILS = function (id) {
-  return `https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.7009403&lng=77.2721047&restaurantId=${id}`;
+  return `https://proxy.cors.sh/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.7009403&lng=77.2721047&restaurantId=${id}`;
 };
 
 export const SEARCH_SUGGESTIONS =
-  "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.7009403&lng=77.2721047&trackingId=null&str=";
+  "https://proxy.cors.sh/https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.7009403&lng=77.2721047&trackingId=null&str=";
